@@ -1,0 +1,53 @@
+<section class="product_details_area bg_color sec_pad3">
+  <div class="container">
+    <div *ngIf="alert" class="alert error">
+      <div class="alert_body">
+        <i class="icon-close"></i>
+        Error Message! {{message}}
+      </div>
+      <div class="alert_close" (click)="alert_close()"><i class="icon_close"></i></div>
+    </div>
+
+    <div class="row" *ngIf="game">
+      <div class="col-lg-6">
+        <div class="product_slider">
+          <img class="detail_image" src="{{game.image}}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="pr_details">
+          <a href="#" class="pr_title f_size_22 f_500 f_p">
+            {{game.title}}
+          </a>
+          <div class="ratting review">
+            <div class="star-rating">
+            </div>
+            <a href="#reviews" class="woocommerce-review-link" rel="nofollow">
+              <span class="count">{{game.downloads}}</span> Downloads
+            </a>
+          </div>
+          <div class="app-detail-left">
+            {{game.company}}
+          </div>
+          <span class="stock">{{game.price}}</span>
+          <p class="f_400 f_size_15">{{game.description}}.</p>
+          <div class="cart_button">
+            <a href="{{game.url.android}}" target="_blank" class="cart_btn">Android</a>
+            <a href="{{game.url.apple}}" target="_blank" class="cart_btn">Apple</a>
+          </div>
+          <div class="pr_footer mt_40 mb-30">
+            <ul class="product_meta list-unstyled">
+              <li><span>Age Restriction : </span>{{game.age}}+</li>
+              <li><span>Category : </span>{{game.category}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="center loading1" *ngIf="loading">
+      <div class="spinner"></div>
+      <p class="text-center">Loading</p>
+    </div>
+  </div>
+</section>
