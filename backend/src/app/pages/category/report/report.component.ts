@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
+
 import {
   NbGlobalPhysicalPosition,
   NbGlobalPosition,
@@ -37,11 +38,11 @@ export class ReportComponent implements OnInit {
         type: 'number',
       },
       name: {
-        title: 'User Name',
+        title: 'Category Name',
         type: 'string',
       },
-      email: {
-        title: 'Email',
+      description: {
+        title: 'Description',
         type: 'string',
       }
     },
@@ -54,12 +55,12 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loaduser()
+    this.loadcategory()
   }
 
-  loaduser() {
+  loadcategory() {
     this.loading = true;
-    this.api.getusers().subscribe(
+    this.api.getcategory().subscribe(
       res => {
         this.source.load(res.data);
         this.loading = false;
@@ -73,9 +74,9 @@ export class ReportComponent implements OnInit {
 
   onDelete(event): void {
     this.loading = true;
-    this.api.deleteuser(event.data._id).subscribe(
+    this.api.deletecategory(event.data._id).subscribe(
       res => {
-        this.loaduser()
+        this.loadcategory()
         this.showToast("success", "Message", "Delete successful");
       },
       err => {
@@ -86,7 +87,7 @@ export class ReportComponent implements OnInit {
   }
 
   onEdit(event): void {
-    this.router.navigate(['pages/user/add_user', event.data._id]);
+    this.router.navigate(['pages/category/add_category', event.data._id]);
   }
 
   private showToast(type: NbComponentStatus, title: string, body: string) {

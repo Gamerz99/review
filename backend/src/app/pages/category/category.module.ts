@@ -13,8 +13,8 @@ import {
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './user.component';
+import { CategoryRoutingModule } from './category-routing.module';
+import { CategoryComponent } from './category.component';
 import { ReportComponent } from './report/report.component';
 import { AddComponent } from './add/add.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms';
     NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,
-    UserRoutingModule,
+    CategoryRoutingModule,
     NbSelectModule,
     NbIconModule,
     Ng2SmartTableModule,
@@ -39,9 +39,9 @@ import { FormsModule } from '@angular/forms';
     NbSpinnerModule
   ],
   declarations: [
-    UserComponent,
+    CategoryComponent,
     ReportComponent,
     AddComponent
   ],
 })
-export class UserModule { }
+export class CategoryModule { }

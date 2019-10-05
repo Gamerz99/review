@@ -24,6 +24,11 @@ const routes: Routes = [{
         .then(m => m.UserModule),
     },
     {
+      path: 'category',
+      loadChildren: () => import('./category/category.module')
+        .then(m => m.CategoryModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

@@ -1,19 +1,21 @@
 <div class="row">
   <div class="col-md-12">
-    <nb-card>
+    <nb-card [nbSpinner]="loading" nbSpinnerStatus="success">
       <nb-card-header>Add Game</nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
               <label for="title" class="label">Title</label>
-              <input type="text" nbInput fullWidth id="title" placeholder="Game Title">
+              <input type="text" name="title" [(ngModel)]="game.title" nbInput fullWidth id="title"
+                placeholder="Game Title">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="description" class="label">Game Description</label>
-              <textarea type="text" nbInput fullWidth id="description" placeholder="Game Description"> </textarea>
+              <textarea type="text" name="description" [(ngModel)]="game.description" nbInput fullWidth id="description"
+                placeholder="Game Description"> </textarea>
             </div>
           </div>
         </div>
@@ -21,13 +23,14 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="company" class="label">Company</label>
-              <input type="text" nbInput fullWidth id="company" placeholder="Company">
+              <input type="text" name="company" [(ngModel)]="game.company" nbInput fullWidth id="company"
+                placeholder="Company">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="price" class="label">Price</label>
-              <input type="text" nbInput fullWidth id="price" placeholder="Price">
+              <input type="text" name="price" [(ngModel)]="game.price" nbInput fullWidth id="price" placeholder="Price">
             </div>
           </div>
         </div>
@@ -35,7 +38,8 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="category" class="label">Category</label>
-              <nb-select fullWidth selected="Sports">
+              <nb-select name="category" [(ngModel)]="game.category" fullWidth>
+                <nb-option value="null">--Select--</nb-option>
                 <nb-option value="Sports">Sports</nb-option>
                 <nb-option value="Fire">Fire</nb-option>
               </nb-select>
@@ -44,7 +48,8 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="rating" class="label">Rating</label>
-              <input type="text" nbInput fullWidth id="rating" placeholder="Rating">
+              <input type="number" name="rating" [(ngModel)]="game.rating" nbInput fullWidth id="rating"
+                placeholder="Rating">
             </div>
           </div>
         </div>
@@ -52,14 +57,15 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="downloads" class="label">Downloads</label>
-              <input type="text" nbInput fullWidth id="downloads" placeholder="Downloads">
+              <input type="number" name=" downloads" [(ngModel)]="game.downloads" nbInput fullWidth id="downloads"
+                placeholder="Downloads">
 
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="age" class="label">Age</label>
-              <input type="number" nbInput fullWidth id="age" placeholder="Age">
+              <input type="number" name="age" [(ngModel)]="game.age" nbInput fullWidth id="age" placeholder="Age">
             </div>
           </div>
         </div>
@@ -67,27 +73,38 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="anurl" class="label">Android URL</label>
-              <input type="text" nbInput fullWidth id="anurl" placeholder="Android URL">
+              <input type="text" name="anurl" [(ngModel)]="game.url.android" nbInput fullWidth id="anurl"
+                placeholder="Android URL">
 
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="apurl" class="label">Apple URL</label>
-              <input type="text" nbInput fullWidth id="apurl" placeholder="Apple URL">
+              <input type="text" name="apurl" [(ngModel)]="game.url.apple" nbInput fullWidth id="apurl"
+                placeholder="Apple URL">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="image" class="label">Image URL</label>
+              <input type="text" name="image" [(ngModel)]="game.image" nbInput fullWidth id="image"
+                placeholder="Image URL">
             </div>
           </div>
         </div>
 
         <div class="validation-checkboxes">
-          <nb-checkbox status="success">Trending</nb-checkbox>
-          <nb-checkbox status="warning">Top</nb-checkbox>
-          <nb-checkbox status="danger">Suggestion</nb-checkbox>
+          <nb-checkbox [(ngModel)]="game.trending" status="success">Trending</nb-checkbox>
+          <nb-checkbox [(ngModel)]="game.top" status="warning">Top</nb-checkbox>
+          <nb-checkbox [(ngModel)]="game.suggestion" status="danger">Suggestion</nb-checkbox>
         </div>
       </nb-card-body>
 
       <nb-card-footer>
-        <button type="submit" nbButton>Submit</button>
+        <button type="button" (click)="add(game)" nbButton>Submit</button>
       </nb-card-footer>
     </nb-card>
   </div>

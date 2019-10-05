@@ -38,18 +38,23 @@ export class AddComponent implements OnInit {
         password: null
       };
     } else {
+      this.loading = true;
       this.api.getuserid(id).subscribe(res => {
         this.user.password = "1111";
         this._id = res.data._id;
         this.user.email = res.data.email;
         this.user.name = res.data.name;
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+        this.showToast("danger", "Fail", err.error.message);
       });
     }
   }
 
   add(user) {
     if (this._id) {
-      if (!user.email || !user.email) {
+      if (!user.email || !user.name) {
         this.showToast("warning", "Message", "Please fill all fields");
       } else {
         this.loading = true;
@@ -64,7 +69,7 @@ export class AddComponent implements OnInit {
         );
       }
     } else {
-      if (!user.email || !user.email || !user.password) {
+      if (!user.email || !user.name || !user.password) {
         this.showToast("warning", "Message", "Please fill all fields");
       } else {
         this.loading = true;

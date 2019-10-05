@@ -9,14 +9,16 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
 import { ReportComponent } from './report/report.component';
-import { AddGameComponent } from './add_game/add-game.component';
+import { AddComponent } from './add/add.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -32,12 +34,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     GameRoutingModule,
     NbSelectModule,
     NbIconModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    FormsModule,
+    NbSpinnerModule
   ],
   declarations: [
     GameComponent,
     ReportComponent,
-    AddGameComponent
+    AddComponent
   ],
 })
 export class GameModule { }

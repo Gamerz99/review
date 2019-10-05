@@ -168,13 +168,6 @@ router.put('/:id', verify.ensureToken, async (req, res, next) => {
             return
         }
 
-        const title = await games.findOne({ title: result.value.title });
-        if (title) {
-            res.status(404).json({ message: "Already exist" });
-            return
-        }
-
-        game.title = await result.value.title;
         game.description = await result.value.description;
         game.category = await result.value.category;
         game.image = await result.value.image;
@@ -222,21 +215,6 @@ router.delete('/:id', verify.ensureToken, async (req, res, next) => {
         res.status(200).json({ message: "success" })
     }
     catch (error) {
-        next(error);
-    }
-})
-
-//DELETE channel
-router.delete('/:id', verify.ensureToken, async (req, res, next) => {
-    try {
-        const del = await games.findByIdAndRemove({ _id: req.params.id });
-        if (!del) {
-            res.status(404).json({ message: "Not Success" })
-            return
-        }
-
-        res.status(200).json({ message: "success" })
-    } catch (error) {
         next(error);
     }
 })

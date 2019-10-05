@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../../@core/data/smart-table';
 import {
   NbGlobalPhysicalPosition,
   NbGlobalPosition,
   NbToastrService,
   NbComponentStatus
 } from '@nebular/theme';
+import { ApiService } from '../../../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-report',
@@ -17,6 +18,7 @@ export class ReportComponent implements OnInit {
 
   position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
   index = 1;
+  loading = false;
 
   settings = {
     edit: {
@@ -30,50 +32,80 @@ export class ReportComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      id: {
+      _id: {
         title: 'ID',
         type: 'number',
       },
-      firstName: {
-        title: 'First Name',
+      title: {
+        title: 'Game Title',
         type: 'string',
       },
-      lastName: {
-        title: 'Last Name',
+      company: {
+        title: 'Company',
         type: 'string',
       },
-      username: {
-        title: 'Username',
+      downloads: {
+        title: 'Downloads',
         type: 'string',
       },
-      email: {
-        title: 'E-mail',
+      rating: {
+        title: 'Rating',
+        type: 'number',
+      },
+      price: {
+        title: 'Price',
         type: 'string',
       },
       age: {
         title: 'Age',
         type: 'number',
       },
+      user: {
+        title: 'User',
+        type: 'string',
+      },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData, private toastrService: NbToastrService) {
-    const data = this.service.getData();
-    this.source.load(data);
+  constructor(private toastrService: NbToastrService, private api: ApiService, private router: Router) {
   }
 
   ngOnInit() {
+    this.loadgame()
+  }
+
+  loadgame() {
+    this.loading = true;
+    this.api.getgame().subscribe(
+      res => {
+        this.source.load(res.data);
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+        this.showToast("danger", "Fail", err.error.message);
+      }
+    );
   }
 
   onDelete(event): void {
-    this.showToast("primary", "ss", "ff");
-    console.log(event)
+    this.loading = true;
+    this.api.deletegame(event.data._id).subscribe(
+      res => {
+        this.loadgame()
+        this.showToast("success", "Message", "Delete successful");
+      },
+      err => {
+        this.loading = false;
+        this.showToast("danger", "Fail", err.error.message);
+      }
+    );
   }
 
   onEdit(event): void {
-    console.log(event)
+    this.router.navigate(['pages/game/add_game', event.data._id]);
   }
 
   private showToast(type: NbComponentStatus, title: string, body: string) {

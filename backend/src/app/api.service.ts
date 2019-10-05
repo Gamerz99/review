@@ -10,6 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  //user
   adduser(data) {
     return this.http.post<any>(this.url + '/user', data);
   }
@@ -28,6 +29,48 @@ export class ApiService {
 
   updateuser(id, data) {
     return this.http.put<any>(this.url + '/user/' + id, data);
+  }
+
+  //category
+  addcategory(data) {
+    return this.http.post<any>(this.url + '/category', data);
+  }
+
+  getcategory() {
+    return this.http.get<any>(this.url + '/category');
+  }
+
+  getcategoryid(id) {
+    return this.http.get<any>(this.url + '/category/' + id);
+  }
+
+  deletecategory(id) {
+    return this.http.delete<any>(this.url + '/category/' + id);
+  }
+
+  updatecategory(id, data) {
+    return this.http.put<any>(this.url + '/category/' + id, data);
+  }
+
+  //game
+  addgame(data) {
+    return this.http.post<any>(this.url + '/game', data);
+  }
+
+  getgame() {
+    return this.http.get<any>(this.url + '/game');
+  }
+
+  getgameid(id) {
+    return this.http.get<any>(this.url + '/game/' + id);
+  }
+
+  deletegame(id) {
+    return this.http.delete<any>(this.url + '/game/' + id);
+  }
+
+  updategame(id, data) {
+    return this.http.put<any>(this.url + '/game/' + id, data);
   }
 
   login(data) {
